@@ -1,4 +1,4 @@
-//Controller para de rotas Person
+//Controller para rotas Person
 namespace GastosResidencias.Routes;
 
 using GastosResidencias.Database;
@@ -18,8 +18,8 @@ public static class PersonRoute
             "",
             async (DataContext context) =>
             {
-                var people = await context.People.ToListAsync();
-                return Results.Ok(people);
+                var peoples = await context.People.ToListAsync();
+                return Results.Ok(peoples);
             }
         );
 
