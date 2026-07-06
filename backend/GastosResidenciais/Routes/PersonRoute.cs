@@ -4,6 +4,7 @@ namespace GastosResidencias.Routes;
 using GastosResidencias.Database;
 using GastosResidencias.Dto;
 using GastosResidencias.Models;
+using Microsoft.EntityFrameworkCore;
 
 public static class PersonRoute
 {
@@ -11,6 +12,18 @@ public static class PersonRoute
     public static void PersonRoutes(this WebApplication app)
     {
         var route = app.MapGroup("person");
+
+        // GET
+        route.MapGet(
+            "",
+            async (DataContext context) =>
+            {
+                var people = await context.People.ToListAsync();
+                return Results.Ok(people);
+            }
+        );
+
+        // POST
         route.MapPost(
             "",
             async (PersonRequest req, DataContext context) =>
