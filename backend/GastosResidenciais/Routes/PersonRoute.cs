@@ -28,10 +28,26 @@ public static class PersonRoute
             "",
             async (PersonRequest req, DataContext context) =>
             {
-                var person = new PersonModel(req.name, req.age);
+                var person = new PersonModel { Name = req.name, Age = req.age };
                 await context.AddAsync(person);
                 // Representa o commit no banco de dados.
                 await context.SaveChangesAsync();
+            }
+        );
+        // DELETE
+        route.MapDelete(
+            "{id:long}",
+            async (long id, DataContext context) =>
+            {
+                var person = await context.People.FirstOrDefaultAsync(x => x.Id == id);
+
+                if (person == null)
+                    return Results.NotFound();
+
+                context.People.Remove(person);
+                await context.SaveChangesAsync();
+
+                return Results.NoContent();
             }
         );
     }
