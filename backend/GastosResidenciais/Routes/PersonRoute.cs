@@ -15,11 +15,32 @@ public static class PersonRoute
 
         // GET
         route.MapGet(
-            "",
+            "/summary",
             async (DataContext context) =>
             {
-                var peoples = await context.People.ToListAsync();
-                return Results.Ok(peoples);
+                var people = await context
+                    .People.Select(person => new PersonSummaryResponse(
+                        person.Id,
+                        person.Name,
+                        person.Age,
+                        person
+                            .Transactions.Where(t => t.TransactionType == TransactionType.Income)
+                            .Sum(t => t.Amount),
+                        person
+                            .Transactions.Where(t => t.TransactionType == TransactionType.Expense)
+                            .Sum(t => t.Amount),
+                        person
+                            .Transactions.Where(t => t.TransactionType == TransactionType.Income)
+                            .Sum(t => t.Amount)
+                            - person
+                                .Transactions.Where(t =>
+                                    t.TransactionType == TransactionType.Expense
+                                )
+                                .Sum(t => t.Amount)
+                    ))
+                    .ToListAsync();
+
+                return Results.Ok(people);
             }
         );
 

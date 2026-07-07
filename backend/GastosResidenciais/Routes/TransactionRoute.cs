@@ -9,11 +9,11 @@ public static class TransactionRoute
 {
     public static void TransactionRoutes(this WebApplication app)
     {
-        var route = app.MapGroup("Transaction");
+        var route = app.MapGroup("transaction");
 
         // GET Transactions BY PERSON ID
         route.MapGet(
-            "",
+            "/",
             async (long personId, DataContext context) =>
             {
                 // 1. Busca e filtra as transaction com base no ID da person
