@@ -18,6 +18,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.PersonRoutes();
+app.TransactionRoutes();
 
 app.UseHttpsRedirection();
 app.Run();

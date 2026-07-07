@@ -1,4 +1,4 @@
-//Controller para rotas Person
+// Controller para rotas Person
 namespace GastosResidencias.Routes;
 
 using GastosResidencias.Database;
@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 public static class PersonRoute
 {
-    //This sinaliza que é um metodo de extensão app
+    // This sinaliza que é um metodo de extensão app
     public static void PersonRoutes(this WebApplication app)
     {
         var route = app.MapGroup("person");
