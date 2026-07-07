@@ -9,7 +9,7 @@ public static class TransactionRoute
 {
     public static void TransactionRoutes(this WebApplication app)
     {
-        var route = app.MapGroup("transaction");
+        var route = app.MapGroup("person/transaction");
 
         // GET Transactions BY PERSON ID
         route.MapGet(
@@ -17,26 +17,30 @@ public static class TransactionRoute
             async (long personId, DataContext context) =>
             {
                 // 1. Busca e filtra as transaction com base no ID da person
-                var transactions = await context
-                    .Transaction.Where(t => t.PersonId == personId)
-                    .ToListAsync();
+                var person = await context
+                    .People.Include(p => p.Transactions)
+                    .FirstOrDefaultAsync(p => p.Id == personId);
 
-                // 2. Transformando Entidade em DTO.
-                var response = new List<TransactionResponse>();
-
-                foreach (var transaction in transactions)
+                // Caso não exista nenhuma transaction com o ID do person
+                if (person is null)
                 {
-                    response.Add(
-                        new TransactionResponse(
-                            transaction.Id,
-                            transaction.Description,
-                            transaction.TransactionType,
-                            transaction.Amount,
-                            transaction.PersonId
-                        )
-                    );
+                    return Results.NotFound();
                 }
 
+                // 2. Transformando Entidade em DTO.
+                var response = new PersonTransactionResponse(
+                    person.Id,
+                    person.Name,
+                    person.Age,
+                    person
+                        .Transactions.Select(t => new TransactionResponse(
+                            t.Id,
+                            t.Description,
+                            t.Amount,
+                            t.TransactionType
+                        ))
+                        .ToList()
+                );
                 return Results.Ok(response);
             }
         );
@@ -73,9 +77,8 @@ public static class TransactionRoute
                 var response = new TransactionResponse(
                     transaction.Id,
                     transaction.Description,
-                    transaction.TransactionType,
                     transaction.Amount,
-                    transaction.PersonId
+                    transaction.TransactionType
                 );
                 // 4. Retorna o status 201 (Created) com o objeto criado
                 return Results.Created($"/transaction/{transaction.Id}", response);
