@@ -8,3 +8,10 @@ public record PersonSummaryResponse(
     decimal TotalExpense,
     decimal Balance
 );
+
+public record PersonTransactionResponse(
+    long Id,
+    string Name,
+    int Age,
+    List<TransactionResponse> Transactions
+);
