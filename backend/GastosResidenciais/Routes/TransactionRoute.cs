@@ -3,17 +3,27 @@
 using GastosResidencias.Database;
 using GastosResidencias.Dto;
 using GastosResidencias.Models;
+using GastosResidencias.Repository;
 using Microsoft.EntityFrameworkCore;
 
 public static class TransactionRoute
 {
     public static void TransactionRoutes(this WebApplication app)
     {
-        var route = app.MapGroup("person/transaction");
+        var route = app.MapGroup("person");
+
+        route.MapGet(
+            "transactions/summary-total",
+            async (TransactionRepository repo) =>
+            {
+                var summaryTotal = await repo.GetAllSummaryTotalAsync();
+                return Results.Ok(summaryTotal);
+            }
+        );
 
         // GET Transactions BY PERSON ID
         route.MapGet(
-            "/",
+            "/{personId}/transactions",
             async (long personId, DataContext context) =>
             {
                 // 1. Busca e filtra as transaction com base no ID da person
@@ -47,11 +57,15 @@ public static class TransactionRoute
 
         // POST
         route.MapPost(
-            "",
-            async (TransactionRequest req, DataContext context) =>
+            "/transaction",
+            async (
+                TransactionRequest req,
+                PersonRepository repositoryPerson,
+                TransactionRepository repository
+            ) =>
             {
                 // 1. Validação de pessoa no banco de dados e restrição por idade
-                var person = await context.People.FirstOrDefaultAsync(x => x.Id == req.personId);
+                var person = await repositoryPerson.GetFirstAsync((int)req.personId); // (int) é uma forma de tipagem/transformação
 
                 if (person == null)
                     return Results.NotFound(new { message = "Pessoa não encontrada." });
@@ -61,27 +75,10 @@ public static class TransactionRoute
                         new { message = "Menores de idade não podem cadastrar receitas." }
                     );
 
-                // 2. Instanciação de transaction
-                var transaction = new TransactionModel
-                {
-                    Description = req.description,
-                    TransactionType = req.transactionType,
-                    Amount = req.amount,
-                    PersonId = person.Id,
-                };
+                var transaction = repository.CreateAsync(req);
 
-                // 3. Adicionando ao contexto e salvando no banco de dados
-                await context.Transaction.AddAsync(transaction);
-                await context.SaveChangesAsync();
-
-                var response = new TransactionResponse(
-                    transaction.Id,
-                    transaction.Description,
-                    transaction.Amount,
-                    transaction.TransactionType
-                );
-                // 4. Retorna o status 201 (Created) com o objeto criado
-                return Results.Created($"/transaction/{transaction.Id}", response);
+                // 4. Rietorna o status 201 (Created) com o objeto criado
+                return Results.Created($"/transaction/{transaction.Id}", transaction);
             }
         );
     }

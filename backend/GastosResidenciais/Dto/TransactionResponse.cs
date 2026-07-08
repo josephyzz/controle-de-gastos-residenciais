@@ -6,3 +6,10 @@ public record TransactionResponse(
     decimal Amount,
     TransactionType TransactionType
 );
+
+public record TransactionAllSummaryTotal(
+    int TotalPeople,
+    decimal TotalAllIncome,
+    decimal TotalAllExpense,
+    decimal TotalAllBalance
+);

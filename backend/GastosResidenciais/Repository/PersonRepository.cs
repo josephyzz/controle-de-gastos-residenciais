@@ -16,6 +16,11 @@ public class PersonRepository
         _context = context;
     }
 
+    public async Task<PersonModel?> GetFirstAsync(int personId)
+    {
+        return await _context.People.FirstOrDefaultAsync(x => x.Id == personId);
+    }
+
     // Método que busca o summary de pessoa.
     public async Task<List<PersonSummaryResponse>> GetSummaryAsync()
     {

@@ -14,6 +14,7 @@ builder.Services.AddScoped<DataContext>();
 
 // Registrando a classes no container de injeção de dependência.
 builder.Services.AddScoped<PersonRepository>();
+builder.Services.AddScoped<TransactionRepository>();
 
 // Liberando acesso de cors
 builder.Services.AddCors(options =>
