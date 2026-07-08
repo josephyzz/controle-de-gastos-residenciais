@@ -1,4 +1,5 @@
 using GastosResidencias.Database;
+using GastosResidencias.Repository;
 using GastosResidencias.Routes;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Registrando nosso contexto DB no DI
 builder.Services.AddScoped<DataContext>();
+
+// Registrando a classes no container de injeção de dependência.
+builder.Services.AddScoped<PersonRepository>();
 
 // Liberando acesso de cors
 builder.Services.AddCors(options =>

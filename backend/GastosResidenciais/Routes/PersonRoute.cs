@@ -3,7 +3,7 @@ namespace GastosResidencias.Routes;
 
 using GastosResidencias.Database;
 using GastosResidencias.Dto;
-using GastosResidencias.Models;
+using GastosResidencias.Repository;
 using Microsoft.EntityFrameworkCore;
 
 public static class PersonRoute
@@ -16,38 +16,19 @@ public static class PersonRoute
         // GET
         route.MapGet(
             "/summary",
-            async (DataContext context) =>
+            // Injerção de Dependências
+            async (PersonRepository repository) =>
             {
-                var people = await context
-                    .People.Select(person => new PersonSummaryResponse(
-                        person.Id,
-                        person.Name,
-                        person.Age,
-                        person
-                            .Transactions.Where(t => t.TransactionType == TransactionType.Income)
-                            .Sum(t => t.Amount),
-                        person
-                            .Transactions.Where(t => t.TransactionType == TransactionType.Expense)
-                            .Sum(t => t.Amount),
-                        person
-                            .Transactions.Where(t => t.TransactionType == TransactionType.Income)
-                            .Sum(t => t.Amount)
-                            - person
-                                .Transactions.Where(t =>
-                                    t.TransactionType == TransactionType.Expense
-                                )
-                                .Sum(t => t.Amount)
-                    ))
-                    .ToListAsync();
-
-                return Results.Ok(people);
+                // 1. Buscando os dados no banco de dados.
+                var summary = await repository.GetSummaryAsync();
+                return Results.Ok(summary);
             }
         );
 
         // POST
         route.MapPost(
             "",
-            async (PersonRequest req, DataContext context) =>
+            async (PersonRequest req, PersonRepository repository) =>
             {
                 // 1. Validando os dados
                 if (req.age <= 0)
@@ -56,15 +37,10 @@ public static class PersonRoute
                         new { message = "Idade não pode ser menor ou igual a zero." }
                     );
                 }
-
                 // 2. Criando registro de pessoa
-                var person = new PersonModel { Name = req.name, Age = req.age };
-                await context.AddAsync(person);
-                // Representa o commit no banco de dados.
-                await context.SaveChangesAsync();
-
+                var person = await repository.CreateAsync(req);
                 //3. Retornando dados
-                return Results.Created("", req);
+                return Results.Created("", person);
             }
         );
         // DELETE
@@ -79,7 +55,6 @@ public static class PersonRoute
 
                 context.People.Remove(person);
                 await context.SaveChangesAsync();
-
                 return Results.NoContent();
             }
         );
