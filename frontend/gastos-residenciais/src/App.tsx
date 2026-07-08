@@ -8,10 +8,16 @@ function App() {
     <>
       <div className="h-screen bg-white w-full p-12">
         <div className="flex justify-around items-center pt-12 pb-5">
-          <h1 className="font-bold italic text-amber-500 text-xl">Controle de Gastos Residencial</h1>
+          <h1 className="font-extrabold italic text-[var(--color-primary)] text-2xl">Controle de Gastos Residencial</h1>
           <Button>Cadastrar Pessoa</Button>
         </div>
-        <PersonTable data={summary.data} onDelete={() => { }} />
+        <div className="w-4/5 m-auto">
+          <PersonTable
+            data={null}
+            headers={['Id', 'Nome', 'Idade', 'Total de Receita', 'Total de Despesas', 'Saldo', 'Ação']}
+            onDelete={() => { }}
+          />
+        </div>
       </div>
     </>
   )

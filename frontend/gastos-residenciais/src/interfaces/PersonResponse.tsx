@@ -1,4 +1,3 @@
-import { Decimal } from 'decimal.js';
 import type { TransactionResponse } from './TransactionResponse';
 
 export interface PersonSummaryResponse {

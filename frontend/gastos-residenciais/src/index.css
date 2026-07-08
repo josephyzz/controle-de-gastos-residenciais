@@ -1,7 +1,18 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: Poppins;
+  src: url("fonts/Poppins/Poppins-Regular.ttf");
+}
 
 :root {
+  --color-primary: #1E40AF;
+  --color-secondary: #1E3A8A;
+  --color-ternary: #EEF4FC;
+  --color-light: #F8FAFC;
+  --color-red: #EF4444;
+  --color-dark: #0F172A;
+
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -13,7 +24,7 @@
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
+  --font-poppins: Poppins, "sans-serif";
   --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
@@ -33,3 +44,37 @@
   }
 }
 
+h1, h2 {
+  font-family: var(--font-poppins);
+  font-weight: 800; /* Títulos principais bem destacados */
+}
+
+h3, h4 {
+  font-family: var(--font-poppins);
+  font-weight: 700; /* Subtítulos */
+}
+
+h5, h6 {
+  font-family: var(--font-poppins);
+  font-weight: 600; /* Seções menores */
+}
+
+p, span, option, label {
+  font-family: var(--font-poppins);
+  font-weight: 400; /* Texto padrão, leitura confortável */
+}
+
+a {
+  font-family: var(--font-poppins);
+  font-weight: 500; /* Leve destaque para links */
+}
+
+button, input {
+  font-family: var(--font-poppins);
+  font-weight: 600; /* Leve reforço para botões e campos */
+}
+
+div {
+  font-family: var(--font-poppins);
+  font-weight: 400; /* Neutro */
+}

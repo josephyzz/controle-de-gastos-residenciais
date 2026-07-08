@@ -28,7 +28,7 @@ export const Button: React.FC<ButtonProps> = ({
       className={`cursor-pointer
         font-semibold px-5 py-2 rounded-2xl w-fit shadow-md 
         transition-all duration-300 ease-out hover:scale-95 flex items-center justify-center gap-2
-        bg-amber-500 hover:bg-amber-600 italic text-white
+        bg-[var(--color-primary)] hover:bg-[var(--color-secondary)] italic text-white
         ${isPending ? "opacity-75 cursor-not-allowed" : ""}
         ${className}
       `}
