@@ -29,11 +29,11 @@ export default function CreatePersonModal({
 
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999]">
-      <div className="bg-white p-6 rounded-xl w-[95%] w-4/5 lg:max-w-xl shadow-xl">
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-99">
+      <div className="bg-white p-6 rounded-xl w-4/5 lg:max-w-xl shadow-xl">
         {/* Header: Parte superior do modal, com o titulo e a ação de fechar */}
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-xl font-bold">
+          <h2 className="text-xl text-[var(--color-primary)] font-bold">
             Cadastrar Pessoa
           </h2>
           <button onClick={onClose}>

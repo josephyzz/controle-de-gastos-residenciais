@@ -1,4 +1,4 @@
-import type { TransactionResponse } from './TransactionResponse';
+import type { AllSummaryTotalResponse, TransactionResponse } from './TransactionResponse';
 
 export interface PersonSummaryResponse {
   id: number;
@@ -7,6 +7,11 @@ export interface PersonSummaryResponse {
   totalIncome: number;
   balance: number;
   totalExpense: number;
+}
+
+export interface SummaryResponse {
+  data: PersonSummaryResponse[];
+  summaryTotal: AllSummaryTotalResponse;
 }
 
 export interface PersonTransactionResponse {

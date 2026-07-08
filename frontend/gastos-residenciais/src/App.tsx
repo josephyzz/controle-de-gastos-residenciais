@@ -33,7 +33,6 @@ function App() {
     deletePerson.mutate(personId);
   }
 
-
   return (
     <>
       <div className="h-screen bg-white w-full p-12">
@@ -45,7 +44,7 @@ function App() {
         </div>
         <div className="w-4/5 m-auto">
           <PersonTable
-            data={summary.data}
+            summary={summary.data}
             headers={['Id', 'Nome', 'Idade', 'Total de Receita', 'Total de Despesas', 'Saldo', 'Ação']}
             onDetail={(personId) => { navigate(`/person/${personId}/transactions`) }}
             onDelete={handleDelete}

@@ -32,10 +32,8 @@ const usePersonMutate = () => {
   const deletePerson = useMutation({
     mutationFn: delete_person,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["summary"],
-        exact: false,
-      });
+      queryClient.invalidateQueries({ queryKey: ["summary"] });
+      queryClient.invalidateQueries({ queryKey: ["summary-total"] });
     },
   });
   return {

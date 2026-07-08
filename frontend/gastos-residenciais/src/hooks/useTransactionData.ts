@@ -9,7 +9,6 @@ const get_transactions_by_person_id = async (personId: number) => {
 }
 
 export const useTransactionData = (personId?: number) => {
-
   const transactions = useQuery({
     // Cria cache de transactions para cada pessoa
     queryKey: ["transactions", personId],
@@ -17,7 +16,6 @@ export const useTransactionData = (personId?: number) => {
     queryFn: () => get_transactions_by_person_id(personId!),
     enabled: personId !== undefined,
   });
-
 
   return { transactions };
 };
