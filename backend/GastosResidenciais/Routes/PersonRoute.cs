@@ -49,10 +49,22 @@ public static class PersonRoute
             "",
             async (PersonRequest req, DataContext context) =>
             {
+                // 1. Validando os dados
+                if (req.age <= 0)
+                {
+                    return Results.BadRequest(
+                        new { message = "Idade não pode ser menor ou igual a zero." }
+                    );
+                }
+
+                // 2. Criando registro de pessoa
                 var person = new PersonModel { Name = req.name, Age = req.age };
                 await context.AddAsync(person);
                 // Representa o commit no banco de dados.
                 await context.SaveChangesAsync();
+
+                //3. Retornando dados
+                return Results.Created("", req);
             }
         );
         // DELETE

@@ -11,7 +11,7 @@ const fetch_person_summary = async () => {
 export const usePersonData = () => {
 
   const summary = useQuery({
-    queryKey: ["summary", "people"],
+    queryKey: ["summary"],
     queryFn: fetch_person_summary,
   });
 
