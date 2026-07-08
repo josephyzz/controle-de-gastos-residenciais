@@ -12,15 +12,6 @@ public static class TransactionRoute
     {
         var route = app.MapGroup("person");
 
-        route.MapGet(
-            "transactions/summary-total",
-            async (TransactionRepository repo) =>
-            {
-                var summaryTotal = await repo.GetAllSummaryTotalAsync();
-                return Results.Ok(summaryTotal);
-            }
-        );
-
         // GET Transactions BY PERSON ID
         route.MapGet(
             "/{personId}/transactions",

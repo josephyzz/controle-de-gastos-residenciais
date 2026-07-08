@@ -17,11 +17,15 @@ public static class PersonRoute
         route.MapGet(
             "/summary",
             // Injerção de Dependências
-            async (PersonRepository repository) =>
+            async (PersonRepository repository, TransactionRepository repo) =>
             {
                 // 1. Buscando os dados no banco de dados.
                 var summary = await repository.GetSummaryAsync();
-                return Results.Ok(summary);
+                var total = await repo.GetAllSummaryTotalAsync();
+                // 2. Montando JSON
+                var response = new { data = summary, summaryTotal = total };
+
+                return Results.Ok(response);
             }
         );
 
