@@ -1,14 +1,15 @@
+//src/components/modal/CreatePersonModal.tsx
 import { useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "../button/Button";
 import type { PersonRequest } from "../../interfaces/PersonRequest";
 
-
+// Tipagem dos dados do componente
 interface PersonModalProps {
   onClose: () => void;
   onSubmit: (data: PersonRequest) => void;
 }
-
+// Modal usado para criação de um novo registro de pessoa
 export default function CreatePersonModal({
   onClose,
   onSubmit,
@@ -16,6 +17,8 @@ export default function CreatePersonModal({
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
 
+  // Função que realiza a passagem de dados para criação,
+  // Também realiza validação dos dados e avisos.
   const handleSubmit = () => {
     if (!name) return alert("Nome não pode está vazio");
     if (age <= 0) return alert("Idade deve ser maior que zero.")
@@ -28,7 +31,7 @@ export default function CreatePersonModal({
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999]">
       <div className="bg-white p-6 rounded-xl w-[95%] w-4/5 lg:max-w-xl shadow-xl">
-        {/* HEADER */}
+        {/* Header: Parte superior do modal, com o titulo e a ação de fechar */}
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold">
             Cadastrar Pessoa
@@ -38,8 +41,8 @@ export default function CreatePersonModal({
           </button>
         </div>
 
-        {/* FORM GRID */}
-        <div className="grid grid-cols-1 gap-4">
+        {/* Form: Formulario para o preenchimento dos dados */}
+        <div>
           {/* Nome */}
           <div>
             <label className="font-semibold">Nome</label>

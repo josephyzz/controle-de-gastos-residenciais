@@ -7,9 +7,10 @@ interface TableProps {
   data: PersonSummaryResponse[] | null;
   headers: string[];
   onDelete?: (personId: number) => void;
+  onDetail?: (personId: number) => void;
 }
 
-const PersonTable: React.FC<TableProps> = ({ data, headers, onDelete }) => {
+const PersonTable: React.FC<TableProps> = ({ data, headers, onDetail, onDelete }) => {
   return (
     <div className="relative overflow-x-auto bg-neutral-primary-soft  rounded-xl ">
       <table className="w-full text-sm text-left rtl:text-right text-body">
@@ -54,6 +55,7 @@ const PersonTable: React.FC<TableProps> = ({ data, headers, onDelete }) => {
                     <button
                       className="text-blue-600 hover:text-blue-800 transition-colors cursor-pointer"
                       title="Ver detalhes"
+                      onClick={() => onDetail?.(personSummary.id)}
                     >
                       <ArrowRight size={18} />
                     </button>

@@ -1,12 +1,15 @@
 import { useState } from "react";
+
 import { Button } from "./components/button/Button"
 import CreatePersonModal from "./components/modal/CreatePersonModal";
 import PersonTable from "./components/table/PersonTable";
 import { usePersonData } from "./hooks/usePersonData";
 import usePersonMutate from "./hooks/usePersonMutate";
 import type { PersonRequest } from "./interfaces/PersonRequest";
+import { useNavigate } from "react-router-dom";
 
 function App() {
+  const navigate = useNavigate();
   const { summary } = usePersonData();
   const { createPerson, deletePerson } = usePersonMutate();
   const [openModal, setOpenModal] = useState(false);
@@ -44,6 +47,7 @@ function App() {
           <PersonTable
             data={summary.data}
             headers={['Id', 'Nome', 'Idade', 'Total de Receita', 'Total de Despesas', 'Saldo', 'Ação']}
+            onDetail={(personId) => { navigate(`/person/${personId}/transactions`) }}
             onDelete={handleDelete}
           />
         </div>
