@@ -5,9 +5,9 @@ export interface PersonSummaryResponse {
   id: number;
   name: string;
   age: number;
-  TotalIncome: Decimal;
-  TotalExpense: Decimal;
-  Balance: Decimal;
+  totalIncome: number;
+  balance: number;
+  totalExpense: number;
 }
 
 export interface PersonTransactionResponse {

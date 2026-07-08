@@ -9,17 +9,17 @@ interface TableProps {
 
 const PersonTable: React.FC<TableProps> = ({ data, onDelete }) => {
   return (
-    <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-base border border-default">
+    <div className="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded-xl border border-default">
       <table className="w-full text-sm text-left rtl:text-right text-body">
-        <thead className="bg-neutral-secondary-soft bg-gray-300 border-b border-default">
-          <tr>
-            <th className="px-6 py-3 font-medium">Id</th>
-            <th className="px-6 py-3 font-medium">Nome</th>
-            <th className="px-6 py-3 font-medium">Idade</th>
-            <th className="px-6 py-3 font-medium">Total Receita</th>
-            <th className="px-6 py-3 font-medium">Total Despesa</th>
-            <th className="px-6 py-3 font-medium">Lucro</th>
-            <th className="px-6 py-3 font-medium">Action</th>
+        <thead className="bg-neutral-secondary-soft bg-amber-500 border-b border-default">
+          <tr className="divide-x divide-gray-300 font-bold text-white">
+            <th className="px-6 py-3 text-center">Id</th>
+            <th className="px-6 py-3 text-center">Nome</th>
+            <th className="px-6 py-3 text-center">Idade</th>
+            <th className="px-6 py-3 text-center">Total Receita</th>
+            <th className="px-6 py-3 text-center">Total Despesa</th>
+            <th className="px-6 py-3 text-center">Lucro</th>
+            <th className="px-6 py-3 text-center">Action</th>
           </tr>
         </thead>
 
@@ -28,7 +28,7 @@ const PersonTable: React.FC<TableProps> = ({ data, onDelete }) => {
             data.map((personSummary: PersonSummaryResponse) => (
               <tr
                 key={personSummary.id}
-                className="odd:bg-neutral-primary even:bg-neutral-secondary-soft border-b border-default"
+                className="odd:bg-neutral-primary even:bg-neutral-secondary-soft divide-x divide-gray-300  border-default"
               >
 
                 <td className="px-6 py-4">{personSummary.id}</td>
@@ -40,9 +40,9 @@ const PersonTable: React.FC<TableProps> = ({ data, onDelete }) => {
                 </th>
 
                 <td className="px-6 py-4">{personSummary.age}</td>
-                <td className="px-6 py-4">{formatCurrency(personSummary.TotalIncome)}</td>
-                <td className="px-6 py-4">{formatCurrency(personSummary.TotalExpense)}</td>
-                <td className="px-6 py-4">{formatCurrency(personSummary.Balance)}</td>
+                <td className="px-6 py-4">{formatCurrency(personSummary.totalIncome)}</td>
+                <td className="px-6 py-4">{formatCurrency(personSummary.totalExpense)}</td>
+                <td className="px-6 py-4">{formatCurrency(personSummary.balance)}</td>
 
                 <td className="px-6 py-4">
                   <button
