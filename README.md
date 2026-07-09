@@ -172,15 +172,15 @@ npm run dev
 Você pode adicionar outras capturas da aplicação para mostrar diferentes funcionalidades.
 
 <p align="center">
-  <img src="./docs/images/person.png" width="700"/>
+  <img src="./ui/modal-cadastro-pessoa.png" width="700"/>
 </p>
 
 <p align="center">
-  <img src="./docs/images/transaction.png" width="700"/>
+  <img src="./ui/transações.png" width="700"/>
 </p>
 
 ---
 
 ## 👨‍💻 Autor
 
-Desenvolvido como projeto de estudo para praticar desenvolvimento Full Stack utilizando **ASP.NET Core**, **React** e **TypeScript**.
+Desenvolvido como projeto de estudo para praticar desenvolvimento Full Stack utilizando **ASP.NET Core**, **React** e **TypeScript** e assim conseguir uma vaga de estagio ou junior.
