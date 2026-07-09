@@ -16,6 +16,7 @@ public class PersonRepository
         _context = context;
     }
 
+    // Método para buscar person por ID
     public async Task<PersonModel?> GetFirstAsync(int personId)
     {
         return await _context.People.FirstOrDefaultAsync(x => x.Id == personId);
@@ -24,6 +25,7 @@ public class PersonRepository
     // Método que busca o summary de pessoa.
     public async Task<List<PersonSummaryResponse>> GetSummaryAsync()
     {
+        // Buscando dados e montando O DTO
         return await _context
             .People.Select(person => new PersonSummaryResponse(
                 person.Id,

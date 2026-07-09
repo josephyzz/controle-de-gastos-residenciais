@@ -41,6 +41,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Registros das rotas
 app.PersonRoutes();
 app.TransactionRoutes();
 

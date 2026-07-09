@@ -52,11 +52,12 @@ public static class PersonRoute
             "{id:long}",
             async (long id, DataContext context) =>
             {
+                // 1. Buscnando person pelo I
                 var person = await context.People.FirstOrDefaultAsync(x => x.Id == id);
 
                 if (person == null)
                     return Results.NotFound();
-
+                // 2. Realizando remoção, e salvando alterações no banco de dados
                 context.People.Remove(person);
                 await context.SaveChangesAsync();
                 return Results.NoContent();
