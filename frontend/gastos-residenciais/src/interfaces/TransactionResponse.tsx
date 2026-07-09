@@ -1,6 +1,7 @@
+// Interfaces, para tipagem de dados
 export interface TransactionResponse {
   id: number;
-  name: string;
+  description: string;
   amount: number;
   transactionType: number;
 }
