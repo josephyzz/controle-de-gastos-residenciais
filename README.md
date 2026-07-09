@@ -131,6 +131,7 @@ SQLite
 │   ├── Models
 │   ├── DTO
 │   ├── Repository
+│   ├── Properties
 │   ├── Migrations
 │   └── Database
 │
@@ -138,6 +139,7 @@ SQLite
 │   ├── components
 │   ├── hooks
 │   ├── services
+│   ├── interfaces
 │   ├── pages
 │   ├── utils
 │   └── assets
