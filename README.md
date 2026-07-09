@@ -172,8 +172,6 @@ npm run dev
 
 # 📸 Mais imagens
 
-Você pode adicionar outras capturas da aplicação para mostrar diferentes funcionalidades.
-
 <p align="center">
   <img src="./ui/modal-cadastro-pessoa.png" width="700"/>
 </p>
@@ -186,4 +184,4 @@ Você pode adicionar outras capturas da aplicação para mostrar diferentes func
 
 ## 👨‍💻 Autor
 
-Desenvolvido como projeto de estudo para praticar desenvolvimento Full Stack utilizando **ASP.NET Core**, **React** e **TypeScript** e assim conseguir uma vaga de estagio ou junior.
+Desenvolvido como projeto de estudo para praticar desenvolvimento Full Stack utilizando **ASP.NET Core**, **React** e **TypeScript** e assim conseguir uma vaga de estagio ou junior na area de desenvolvimento web para ERP.
