@@ -27,6 +27,7 @@ A tela principal apresenta um resumo financeiro de todas as pessoas cadastradas,
 * ✅ Cadastro de Pessoas
 * ✅ Cadastro de Transações (Receitas e Despesas)
 * ✅ Consulta de saldo por pessoa e Resumo Total
+* ✅ Menores de idade só pode registrar despesas
 * ✅ API REST documentada com Swagger
 
 ---
