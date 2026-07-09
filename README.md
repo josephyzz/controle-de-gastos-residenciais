@@ -180,6 +180,11 @@ npm run dev
   <img src="./ui/transações.png" width="700"/>
 </p>
 
+<p align="center">
+  <img src="./ui/registro-transação.png" width="700"/>
+</p>
+
+
 ---
 
 ## 👨‍💻 Autor
