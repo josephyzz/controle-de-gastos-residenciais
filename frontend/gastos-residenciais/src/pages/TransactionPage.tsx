@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useTransactionData } from "../hooks/useTransactionData";
 import { Button } from "../components/button/Button";
 import { useState } from "react";
+import { AxiosError } from "axios";
 import CreateTransactionModal from "../components/modal/CreateTransactionModal";
 import type { TransactionRequest } from "../interfaces/TransactionRequest";
 import useTransactionMutate from "../hooks/useTransactionMutate";
@@ -21,9 +22,18 @@ function TransactionPage() {
   const navigate = useNavigate();
 
   // Função para criar Transação. 
-  // Como não foi necessario, não chamei o onSuccess ou onError
+  // Como não foi necessario, não chamei o onSuccess
   function handleSubmit(data: TransactionRequest) {
-    createTransaction.mutate(data);
+    createTransaction.mutate(data, {
+      onError(error) {
+        const axiosError = error as AxiosError<{ message: string }>;
+
+        alert(
+          axiosError.response?.data.message ??
+          "Ocorreu um erro ao cadastrar a transação."
+        );
+      },
+    });
   }
 
   return (
