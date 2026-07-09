@@ -58,18 +58,25 @@ public static class TransactionRoute
                 // 1. Validação de pessoa no banco de dados e restrição por idade
                 var person = await repositoryPerson.GetFirstAsync((int)req.personId); // (int) é uma forma de tipagem/transformação
 
+                // Verificando se person existe
                 if (person == null)
                     return Results.NotFound(new { message = "Pessoa não encontrada." });
+
+                // Verificando se amount não é negativo ou zero
+                if (req.amount <= 0)
+                {
+                    return Results.BadRequest(new { message = "O valor deve ser maior que zero." });
+                }
                 // Regra de negócio, menor de idade apenas despesas
                 if (person.Age < 18 && req.transactionType == TransactionType.Income)
                     return Results.BadRequest(
                         new { message = "Menores de idade não podem cadastrar receitas." }
                     );
-
+                // 2. Criando transaction pelo repository.
                 var transaction = repository.CreateAsync(req);
 
-                // 4. Rietorna o status 201 (Created) com o objeto criado
-                return Results.Created($"/transaction/{transaction.Id}", transaction);
+                // 3. Retorna o status 201 (Created) com o objeto criado
+                return Results.Created();
             }
         );
     }
