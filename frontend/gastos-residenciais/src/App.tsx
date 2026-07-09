@@ -12,8 +12,10 @@ function App() {
   const navigate = useNavigate();
   const { summary } = usePersonData();
   const { createPerson, deletePerson } = usePersonMutate();
+  // Serve como estado que controla a apareçam do modal
   const [openModal, setOpenModal] = useState(false);
 
+  // Função para lidar com submissão de dados.
   function handleSubmit(personRequest: PersonRequest) {
     createPerson.mutate(personRequest,
       {
@@ -42,7 +44,8 @@ function App() {
           </h1>
           <Button onClick={() => setOpenModal(true)}>Cadastrar Pessoa</Button>
         </div>
-        <div className="w-4/5 m-auto">
+        <div className="w-4/5 pb-40 m-auto">
+          {/*Componente de tabela para exibição de dados*/}
           <PersonTable
             summary={summary.data}
             headers={['Id', 'Nome', 'Idade', 'Total de Receita', 'Total de Despesas', 'Saldo', 'Ação']}
@@ -50,6 +53,7 @@ function App() {
             onDelete={handleDelete}
           />
         </div>
+        {/* Logica de abrimento de modal, para o modal de criação*/}
         {openModal && (
           <CreatePersonModal
             onClose={() => { setOpenModal(false) }}

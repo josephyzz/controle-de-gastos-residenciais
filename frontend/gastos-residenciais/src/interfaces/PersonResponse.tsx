@@ -1,3 +1,5 @@
+// interfaces para tipagem de dados.
+
 import type { AllSummaryTotalResponse, TransactionResponse } from './TransactionResponse';
 
 export interface PersonSummaryResponse {

@@ -1,3 +1,5 @@
+// Nucleo do nosso projeto react, tudo passa por aqui
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
@@ -10,11 +12,11 @@ const queryClient = new QueryClient();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    {/*Provider para permitir o uso/controle de queries*/}
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-
+        {/* Rotas do sistemas */}
         <Routes>
-          {/* Outside Routes */}
           <Route path='/' element={<App />} />
           <Route path='/person/:personId/transactions' element={<TransactionPage />} />
         </Routes>
